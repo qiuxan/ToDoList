@@ -1,0 +1,31 @@
+<form class="add-form" (ngSubmit)="submit()">
+  <input
+    type="text"
+    placeholder="Task title..."
+    name="title"
+    maxlength="120"
+    required
+    [ngModel]="title()"
+    (ngModelChange)="title.set($event)"
+  />
+
+  <div class="divider"></div>
+
+  <textarea
+    name="description"
+    placeholder="Description (optional)..."
+    maxlength="400"
+    rows="2"
+    [ngModel]="description()"
+    (ngModelChange)="description.set($event)"
+  ></textarea>
+
+  <div class="form-actions">
+    <button type="submit" class="btn-add" [disabled]="!title().trim()">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+        <path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+      </svg>
+      Add task
+    </button>
+  </div>
+</form>

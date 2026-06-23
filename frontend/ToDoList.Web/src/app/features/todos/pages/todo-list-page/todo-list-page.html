@@ -3,3 +3,21 @@
 </div>
 
 <app-add-todo-form (createRequested)="onCreateRequested($event)" />
+
+@if (isCreating()) {
+  <p class="status">Creating task...</p>
+}
+
+@if (errorMessage()) {
+  <p class="error">{{ errorMessage() }}</p>
+}
+
+@if (createdTodo(); as todo) {
+  <div class="created-preview">
+    <strong>{{ todo.title }}</strong>
+
+    @if (todo.description) {
+      <p>{{ todo.description }}</p>
+    }
+  </div>
+}

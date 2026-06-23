@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
+import { TodoApi } from '../../../../core/api/todo-api';
+import { Todo } from '../../../../core/models/todo';
 import { AddTodoForm, AddTodoFormValue } from '../../components/add-todo-form/add-todo-form';
 
 @Component({
@@ -8,7 +10,25 @@ import { AddTodoForm, AddTodoFormValue } from '../../components/add-todo-form/ad
   styleUrl: './todo-list-page.scss',
 })
 export class TodoListPage {
+  private readonly todoApi = inject(TodoApi);
+
+  readonly createdTodo = signal<Todo | null>(null);
+  readonly errorMessage = signal<string | null>(null);
+  readonly isCreating = signal(false);
+
   onCreateRequested(value: AddTodoFormValue): void {
-    console.log('create requested from page', value);
+    this.errorMessage.set(null);
+    this.isCreating.set(true);
+
+    this.todoApi.createTodo(value).subscribe({
+      next: (todo) => {
+        this.createdTodo.set(todo);
+        this.isCreating.set(false);
+      },
+      error: () => {
+        this.errorMessage.set('Could not create task. Please try again.');
+        this.isCreating.set(false);
+      },
+    });
   }
 }

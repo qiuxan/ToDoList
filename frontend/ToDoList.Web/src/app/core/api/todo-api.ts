@@ -6,6 +6,10 @@ import { CreateTodoRequest, Todo } from '../models/todo';
 export class TodoApi {
   private readonly http = inject(HttpClient);
 
+  getTodos() {
+    return this.http.get<Todo[]>('/api/todos');
+  }
+
   createTodo(request: CreateTodoRequest) {
     return this.http.post<Todo>('/api/todos', request);
   }

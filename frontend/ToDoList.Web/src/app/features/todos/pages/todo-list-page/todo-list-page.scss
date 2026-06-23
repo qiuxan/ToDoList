@@ -28,25 +28,3 @@
 .error {
   color: var(--danger);
 }
-
-.created-preview {
-  margin-top: 1rem;
-  background: var(--surface);
-  border: 0.5px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 14px 16px;
-
-  strong {
-    display: block;
-    font-size: 15px;
-    font-weight: 500;
-    color: var(--text-primary);
-  }
-
-  p {
-    font-size: 13px;
-    color: var(--text-secondary);
-    margin-top: 3px;
-    line-height: 1.5;
-  }
-}

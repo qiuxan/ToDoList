@@ -8,16 +8,12 @@
   <p class="status">Creating task...</p>
 }
 
+@if (isLoading()) {
+  <p class="status">Loading tasks...</p>
+}
+
 @if (errorMessage()) {
   <p class="error">{{ errorMessage() }}</p>
 }
 
-@if (createdTodo(); as todo) {
-  <div class="created-preview">
-    <strong>{{ todo.title }}</strong>
-
-    @if (todo.description) {
-      <p>{{ todo.description }}</p>
-    }
-  </div>
-}
+<app-todo-list [todos]="todos()" />

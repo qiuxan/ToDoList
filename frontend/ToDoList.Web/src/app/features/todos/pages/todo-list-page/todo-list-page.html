@@ -16,4 +16,4 @@
   <p class="error">{{ errorMessage() }}</p>
 }
 
-<app-todo-list [todos]="todos()" />
+<app-todo-list [todos]="todos()" (deleteRequested)="onDeleteRequested($event)" />

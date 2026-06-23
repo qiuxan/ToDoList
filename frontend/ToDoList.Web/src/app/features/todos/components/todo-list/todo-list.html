@@ -17,6 +17,14 @@
           <p class="todo-desc">{{ todo.description }}</p>
         }
       </div>
+      <button
+        type="button"
+        class="btn-delete"
+        aria-label="Delete task"
+        (click)="deleteRequested.emit(todo.id)"
+      >
+        Delete
+      </button>
     </div>
   } @empty {
     <p class="empty-state">No tasks yet.</p>

@@ -13,4 +13,8 @@ export class TodoApi {
   createTodo(request: CreateTodoRequest) {
     return this.http.post<Todo>('/api/todos', request);
   }
+
+  deleteTodo(id: string) {
+    return this.http.delete<void>(`/api/todos/${id}`);
+  }
 }

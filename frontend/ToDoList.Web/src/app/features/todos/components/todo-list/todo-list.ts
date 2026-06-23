@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { Todo } from '../../../../core/models/todo';
 
 @Component({
@@ -9,4 +9,6 @@ import { Todo } from '../../../../core/models/todo';
 })
 export class TodoList {
   readonly todos = input.required<Todo[]>();
+
+  readonly deleteRequested = output<string>();
 }

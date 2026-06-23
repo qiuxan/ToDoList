@@ -95,3 +95,19 @@
   color: var(--text-tertiary);
   text-align: center;
 }
+
+.btn-delete {
+  align-self: center;
+  border: none;
+  background: transparent;
+  color: var(--text-tertiary);
+  font-family: inherit;
+  font-size: 12px;
+  cursor: pointer;
+  padding: 4px 0 4px 8px;
+  transition: color 0.15s;
+}
+
+.btn-delete:hover {
+  color: var(--danger);
+}

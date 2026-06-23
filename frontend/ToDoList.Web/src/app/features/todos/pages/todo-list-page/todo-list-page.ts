@@ -54,4 +54,16 @@ export class TodoListPage implements OnInit {
       },
     });
   }
+  onDeleteRequested(id: string): void {
+    this.errorMessage.set(null);
+
+    this.todoApi.deleteTodo(id).subscribe({
+      next: () => {
+        this.todos.update((todos) => todos.filter((todo) => todo.id !== id));
+      },
+      error: () => {
+        this.errorMessage.set('Could not delete task. Please try again.');
+      },
+    });
+  }
 }

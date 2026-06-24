@@ -17,4 +17,12 @@ export class TodoApi {
   deleteTodo(id: string) {
     return this.http.delete<void>(`/api/todos/${id}`);
   }
+
+  completeTodo(id: string) {
+    return this.http.patch<void>(`/api/todos/${id}/complete`, null);
+  }
+
+  incompleteTodo(id: string) {
+    return this.http.patch<void>(`/api/todos/${id}/incomplete`, null);
+  }
 }

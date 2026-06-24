@@ -1,6 +1,10 @@
-import { Component, input, output } from '@angular/core';
+import { Component, input, output, computed } from '@angular/core';
 import { Todo } from '../../../../core/models/todo';
 
+export interface TodoCompletionChange {
+  id: string;
+  isCompleted: boolean;
+}
 @Component({
   selector: 'app-todo-list',
   imports: [],
@@ -9,6 +13,12 @@ import { Todo } from '../../../../core/models/todo';
 })
 export class TodoList {
   readonly todos = input.required<Todo[]>();
+
+  readonly activeTodos = computed(() => this.todos().filter((todo) => !todo.isCompleted));
+
+  readonly completedTodos = computed(() => this.todos().filter((todo) => todo.isCompleted));
+
+  readonly completionChangeRequested = output<TodoCompletionChange>();
 
   readonly deleteRequested = output<string>();
 }

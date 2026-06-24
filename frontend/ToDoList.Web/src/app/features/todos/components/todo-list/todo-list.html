@@ -1,32 +1,75 @@
 <div class="todo-list">
-  @for (todo of todos(); track todo.id) {
-    <div class="todo-item" [class.done]="todo.isCompleted">
-      <input
-        class="todo-check"
-        type="checkbox"
-        [id]="'todo-' + todo.id"
-        [checked]="todo.isCompleted"
-      />
+  <section class="todo-section">
+    <h2 class="section-title">Active</h2>
 
-      <div class="todo-body">
-        <label class="todo-title" [for]="'todo-' + todo.id">
-          {{ todo.title }}
-        </label>
+    @for (todo of activeTodos(); track todo.id) {
+      <div class="todo-item move-enter">
+        <input
+          class="todo-check"
+          type="checkbox"
+          [id]="'todo-' + todo.id"
+          [checked]="todo.isCompleted"
+          (change)="completionChangeRequested.emit({ id: todo.id, isCompleted: true })"
+        />
 
-        @if (todo.description) {
-          <p class="todo-desc">{{ todo.description }}</p>
-        }
+        <div class="todo-body">
+          <label class="todo-title" [for]="'todo-' + todo.id">
+            {{ todo.title }}
+          </label>
+
+          @if (todo.description) {
+            <p class="todo-desc">{{ todo.description }}</p>
+          }
+        </div>
+
+        <button
+          type="button"
+          class="btn-delete"
+          aria-label="Delete task"
+          (click)="deleteRequested.emit(todo.id)"
+        >
+          Delete
+        </button>
       </div>
-      <button
-        type="button"
-        class="btn-delete"
-        aria-label="Delete task"
-        (click)="deleteRequested.emit(todo.id)"
-      >
-        Delete
-      </button>
-    </div>
-  } @empty {
-    <p class="empty-state">No tasks yet.</p>
-  }
+    } @empty {
+      <p class="empty-state">No active tasks.</p>
+    }
+  </section>
+
+  <section class="todo-section">
+    <h2 class="section-title">Completed</h2>
+
+    @for (todo of completedTodos(); track todo.id) {
+      <div class="todo-item done move-enter">
+        <input
+          class="todo-check"
+          type="checkbox"
+          [id]="'todo-' + todo.id"
+          [checked]="todo.isCompleted"
+          (change)="completionChangeRequested.emit({ id: todo.id, isCompleted: false })"
+        />
+
+        <div class="todo-body">
+          <label class="todo-title" [for]="'todo-' + todo.id">
+            {{ todo.title }}
+          </label>
+
+          @if (todo.description) {
+            <p class="todo-desc">{{ todo.description }}</p>
+          }
+        </div>
+
+        <button
+          type="button"
+          class="btn-delete"
+          aria-label="Delete task"
+          (click)="deleteRequested.emit(todo.id)"
+        >
+          Delete
+        </button>
+      </div>
+    } @empty {
+      <p class="empty-state">No completed tasks.</p>
+    }
+  </section>
 </div>
